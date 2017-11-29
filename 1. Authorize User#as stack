@@ -1,6 +1,8 @@
-Login to the Guest VM as stack
-Create and open an openrc script in vim
+# Login to the Guest VM as stack
+# Create and open an openrc script in vim
 sudo vi /opt/stack/demo-openrc.sh
-Press 'I'
-Paste the text from the RC V3 file you copied
-Exit vim by typing 'ESC' and :wq
+# Press 'I'
+# Paste the text from the RC V3 file you copied
+# Exit vim by typing 'ESC' and :wq
+cd /opt/stack && . demo-openrc.sh
+# enter Password
