@@ -1,0 +1,8 @@
+From the host VM, open firefox
+firefox &
+
+Login to the Horizon using the credentials.
+# Note: You can obtain credentials by logging into GuestVM and running the command below.
+# cat /opt/stack/logs/stack.sh.log
+
+Download the RC v3 file by clicking on the top-right corner of the screen.
