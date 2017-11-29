@@ -1,0 +1,38 @@
+Go to Horizon using firefox from host
+On the dashboard, 
+
+Go to Data Processing --> Clusters --> Image Registry
+You should see the image you registered in the last step. Ensure it has correct tags and save
+
+Go to Data Processing --> Clusters --> Node Group Template --> Create Template
+Enter following variables and create a master node group template
+--plugin vanilla 
+--plugin-version 2.7.1
+--name vanilla-default-master 
+--processes namenode resourcemanager 
+--flavor m1.medium
+--auto-security-group
+--floating-ip-pool
+
+Go to Data Processing --> Clusters --> Node Group Template --> Create Template
+Enter following variables and create a worker node group template
+--plugin vanilla 
+--plugin-version 2.7.1
+--name vanilla-default-worker 
+--processes datanode nodemanager 
+--flavor m1.medium
+--auto-security-group
+--floating-ip-pool
+
+Go to Data Processing --> Clusters --> Cluster Template --> Create Template
+Enter following variables and create a cluster template
+--name vanilla-default-cluster 
+--node-groups vanilla-default-master:1 vanilla-default-worker:3
+
+Go to Data Processing --> Clusters --> Launch Cluster
+Enter following variables and launch a cluster template
+--name myCluster
+--cluster-template vanilla-default-cluster
+--user-keypair my_stack
+--neutron-network private
+--image sahara-vanilla-latest-ubuntu
