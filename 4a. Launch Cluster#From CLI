@@ -13,5 +13,5 @@ openstack dataprocessing cluster template create --name vanilla-default-cluster 
 # Launch Cluster #Make sure Neutron network is private
 openstack dataprocessing cluster create --name my-cluster-1 --cluster-template vanilla-default-cluster --user-keypair mystack --neutron-network private --image sahara-vanilla-latest-ubuntu
 
-# To check the status of cluster
+# The cluster launch will take time # To check the status of cluster
 openstack dataprocessing cluster show my-cluster-1 -c Status
