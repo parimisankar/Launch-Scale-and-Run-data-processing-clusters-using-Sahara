@@ -3,15 +3,21 @@
 openstack network list
 # Copy the ID of the network Name "public"
 
+# Create Flavor
+openstack flavor create --disk 40 --ram 4096 --ephemeral 0 --vcpus 2 --public bigdata
+
 # Create the node group template for master and worker nodes
-openstack dataprocessing node group template create --name vanilla-default-master --plugin vanilla --plugin-version 2.7.1 --processes namenode resourcemanager --flavor 2 --auto-security-group --floating-ip-pool <public-pool-id>
-openstack dataprocessing node group template create --name vanilla-default-worker --plugin vanilla --plugin-version 2.7.1 --processes datanode nodemanager --flavor 2 --auto-security-group --floating-ip-pool <public-pool-id>
+openstack dataprocessing node group template create --name vanilla-default-master --plugin vanilla --plugin-version 2.7.1 --processes namenode resourcemanager --flavor <flavor name> --auto-security-group --floating-ip-pool <public-pool-id>
+openstack dataprocessing node group template create --name vanilla-default-worker --plugin vanilla --plugin-version 2.7.1 --processes datanode nodemanager --flavor <flavor name> --auto-security-group --floating-ip-pool <public-pool-id>
 
 # Create Cluster template
 openstack dataprocessing cluster template create --name vanilla-default-cluster --node-groups vanilla-default-master:1 vanilla-default-worker:3
 
+# Create a keypair
+openstack keypair create mystack
+
 # Launch Cluster #Make sure Neutron network is private
-openstack dataprocessing cluster create --name my-cluster-1 --cluster-template vanilla-default-cluster --user-keypair mystack --neutron-network private --image sahara-vanilla-latest-ubuntu
+openstack dataprocessing cluster create --name my-cluster-1 --cluster-template vanilla-default-cluster --user-keypair <keyname> --neutron-network private --image sahara-vanilla-latest-ubuntu
 
 # The cluster launch will take time # To check the status of cluster
 openstack dataprocessing cluster show my-cluster-1 --show-progress
