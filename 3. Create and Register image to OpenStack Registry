@@ -1,5 +1,5 @@
 cd /opt/stack/sahara-image-elements && ls | grep '.qcow2'
 Copy the name of the image into the command below and run the command
 openstack image create sahara-vanilla-latest-ubuntu --disk-format qcow2 --container-format bare --file /opt/stack/sahara-image-elements/$IMAGE
-Register the image to OpenStack Image REgistry with appropriate tags
+Register the image to OpenStack Image Registry with appropriate tags
 openstack dataprocessing image register sahara-vanilla-latest-ubuntu --username ubuntu tags add sahara-vanilla-latest-ubuntu --tags vanilla 2.7.1
