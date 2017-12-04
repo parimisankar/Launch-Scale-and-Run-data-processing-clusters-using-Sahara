@@ -1,4 +1,4 @@
-# Log into the Guest VM as stack
+# Log into the Guest VM as superuser "stack"
 # Get pool id
 openstack network list
 # Copy the ID of the network Name "public"
