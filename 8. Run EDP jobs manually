@@ -1,0 +1,51 @@
+# Create and register a job binaries with Sahara
+$ openstack dataprocessing job binary create --name hive-binary --url "swift://integration.sahara/hive.sql" --username admin --password ubuntu --description "My first job binary"
+ 
+# Create and register data sources with Sahara
+$ openstack dataprocessing data source create --type swift --username admin --password ubuntu --url "swift://integration.sahara/input.txt" input
+$ openstack dataprocessing data source create --type swift --username admin --password ubuntu --url "swift://integration.sahara/output.txt" output
+ 
+# Create a job template using job binary, and datasources
+openstack dataprocessing job template create --type Hive --name hive-job-template --main hive-binary
+ 
+# Execute the job by passing the input ID, output ID, and job template ID
+$ openstack dataprocessing job execute --input input --output output --job-template hive-job-template --cluster my-cluster
+ 
+# Get the job ID
+$ openstack dataprocessing job list
+ 
+# Check the status of the job by passing the job id
+$ openstack dataprocessing job show a1585b6d-5332-42b1-b2db-e4426224cb38
+ 
+########################################################################################################################
+# Bug Alert: https://bugs.launchpad.net/sahara/+bug/1737858                                                            #
+# At the time of documenting this, the job execution fails to run as intended. Sahara Team is working on a fix.        #
+########################################################################################################################
+ 
+# Without the bug, You should see
++-----------------+--------------------------------------+
+| Field           | Value                                |
++-----------------+--------------------------------------+
+| Cluster id      | 434cc522-0e31-40eb-8acf-93c9a9ca9401 |
+| Id              | a1585b6d-5332-42b1-b2db-e4426224cb38 |
+| Input id        | b8b8164d-f9be-4565-b7d9-65ffe62300de |
+| Is protected    | False                                |
+| Is public       | False                                |
+| Job template id | 1400e6e1-0018-4fe0-96e7-f13d6c0ed278 |
+| Output id       | 790614e8-5d77-42f4-b902-a0442b41f8c5 |
+| Status          | SUCCESSFUL                           |
++-----------------+--------------------------------------+
+ 
+# With above bug, I see
++-----------------+--------------------------------------+
+| Field           | Value                                |
++-----------------+--------------------------------------+
+| Cluster id      | 434cc522-0e31-40eb-8acf-93c9a9ca9401 |
+| Id              | a1585b6d-5332-42b1-b2db-e4426224cb38 |
+| Input id        | b8b8164d-f9be-4565-b7d9-65ffe62300de |
+| Is protected    | False                                |
+| Is public       | False                                |
+| Job template id | 1400e6e1-0018-4fe0-96e7-f13d6c0ed278 |
+| Output id       | 790614e8-5d77-42f4-b902-a0442b41f8c5 |
+| Status          | FAILED                               |
++-----------------+--------------------------------------+
