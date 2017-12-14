@@ -1,1 +1,15 @@
-
+# SSH into the namenode
+$ ssh -i mystack.pem ubuntu@172.24.4.4
+ 
+# Switch as hadoop user
+$ sudo su hadoop
+ 
+# Go to the shared hadoop directory
+$ cd /opt/hadoop-2.7.1/share/hadoop/mapreduce
+ 
+# Run the mapreduce job for hadoop to estimate the value of Pi
+$ /opt/hadoop-2.7.1/bin/hadoop jar hadoop-mapreduce-examples-2.7.1.jar pi 10 100
+ 
+# You should see
+# Job Finished in XX.XXX seconds
+# Estimated value of Pi is 3.14800000000000000000
