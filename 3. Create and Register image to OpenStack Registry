@@ -9,3 +9,10 @@ $ openstack dataprocessing image register sahara-vanilla-latest-ubuntu --usernam
  
 # Add tags to the registered image
 $ openstack dataprocessing image tags add sahara-vanilla-latest-ubuntu --tags vanilla 2.7.1
+
+#####################################################################################################################################################
+# Command Guide:                                                                                                                                    #
+# openstack image create <image name> --disk-format <image file format> --container-format bare --file /opt/stack/sahara-image-elements/<image name>#
+# openstack dataprocessing image register <image name> --username <username>                                                                        #
+# openstack dataprocessing image tags add <image name> --tags <plugin> <version>                                                                    #
+#####################################################################################################################################################
