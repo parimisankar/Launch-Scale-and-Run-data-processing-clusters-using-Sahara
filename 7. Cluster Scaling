@@ -1,0 +1,7 @@
+# You can add or delete workers to a cluster based on work load
+$ openstack dataprocessing cluster scale my-cluster --instances vanilla-default-worker:4
+
+#################################################################################################################
+# Command Guide:                                                                                                #
+# openstack dataprocessing cluster scale <cluster name> --instances <node group template name>:<instance count> #
+#################################################################################################################
