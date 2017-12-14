@@ -16,3 +16,18 @@ sudo su -l stack \
 # $ export DIB_HDFS_LIB_DIR="/opt/hadoop/share/hadoop/tools/lib"                                                              #
 # #############################################################################################################################
 && tox -e venv -- sahara-image-create -p vanilla -v 2.7.1 -i ubuntu -u
+
+#############################################################################################################################################
+# Command Tutorial:                                                                                                                         #
+# $ tox -e venv -- sahara-image-create -p <plugin name> -v <version number> -i <operating system> -u                                        #
+# options for the tox command                                                                                                               #
+# -i - Target Operating Systems [ubuntu|fedora|centos|centos7]                                                                              #
+# -p - Target Plugin [vanilla|spark|cloudera|storm|mapr|ambari|plain]                                                                       #
+# -v - Plugin Version [1.3.1|1.6.0|2.1.0|2.7.1|5.5|5.7|5.9]]                                                                                #
+# -s - Spark Version in the plugin [1.3.1|1.6.0|2.1.0|2.2]                                                                                  #
+# -u - Update                                                                                                                               #
+# Sample commands for plugins                                                                                                               #
+# tox -e venv -- sahara-image-create -p spark -s 2.1.0 -u # spark standalone                                                                #
+# tox -e venv -- sahara-image-create -p vanilla -v 2.7.1 -s 2.1.0 -u # spark on vanilla                                                     #
+# DIB_IMAGE_SIZE=10 tox -e venv -- sahara-image-create -p spark -s 2.1.0 -u # spark standalone with custom image size is GB (default = 10G) #
+#############################################################################################################################################
