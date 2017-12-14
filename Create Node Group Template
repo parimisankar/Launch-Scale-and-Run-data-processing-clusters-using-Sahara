@@ -1,0 +1,20 @@
+# Choose flavor for instance --disk 40 --ram 4096 --ephemeral 0 --vcpus 2
+$ openstack flavor list
+ 
+# Get public-pool-id (Copy the id for public network)
+$ openstack network list
+ 
+# Get available services for the plugin and version
+$ openstack dataprocessing plugin show vanilla --plugin-version 2.7.1
+ 
+# Create master node by assigning namenode and resourcemanager from service, pool-id, and bigdata flavor.
+ 
+$ openstack dataprocessing node group template create --name vanilla-default-master --plugin vanilla --plugin-version 2.7.1 --processes namenode resourcemanager --flavor 3 --auto-security-group --floating-ip-pool eceacbcb-8174-4eed-b828-8386cdd4b8c4
+ 
+# Create worker node by assigning datanode and nodemanager from service, pool-id, and bigdata flavor.
+$ openstack dataprocessing node group template create --name vanilla-default-worker --plugin vanilla --plugin-version 2.7.1 --processes datanode nodemanager --flavor 3 --auto-security-group --floating-ip-pool eceacbcb-8174-4eed-b828-8386cdd4b8c4
+
+############################################################################################################################################################################################################################################
+# Command Guide:                                                                                                                                                                                                                           #
+# openstack dataprocessing node group template create --name <node group name> --plugin <plugin> --plugin-version <version> --processes <process 1> <process 2> --flavor <flavor ID> --auto-security-group --floating-ip-pool <public-ID>  #
+############################################################################################################################################################################################################################################
