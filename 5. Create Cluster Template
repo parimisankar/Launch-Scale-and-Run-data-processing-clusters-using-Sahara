@@ -10,6 +10,14 @@ $ openstack dataprocessing cluster create --name my-cluster --cluster-template v
 # The process takes time, Check the progress
 $ openstack dataprocessing cluster show my-cluster --show-progress
 # Get the IP of the master node from the final output screen
+
+#############################################################################################################################################################################################################
+# Command Guide:                                                                                                                                                                                            #
+# openstack dataprocessing cluster template create --name <cluster template name> --node-groups <master node group template>:<no. of master (usually 1)> <worker node group template name>:<no. of workers> #
+# openstack keypair create mystack --publickey <Path to your public key>                                                                                                                                    #
+# openstack dataprocessing cluster create --name <cluster name> --cluster-template <cluster template name> --user-keypair <key name> --neutron-network private --image <image name registered with sahara>  #
+#############################################################################################################################################################################################################
+
 ###############################################################################################################################################################################################################################################################################################################
 | Output Screen:                                                                                                                                                                                                                                                                                              |
 +---------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
