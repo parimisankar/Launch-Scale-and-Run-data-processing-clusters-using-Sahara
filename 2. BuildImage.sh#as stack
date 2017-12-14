@@ -1,5 +1,18 @@
 #! /bin/bash
-cd /opt/stack \
+sudo su -l stack \
+&& sudo apt-get install cloud-init tox vim \ 
+# Get admin privileges on openstack
+&& cd /devstack \
+&& source openrc admin admin \
+&& cd /opt/stack \
 && git clone https://github.com/openstack/sahara-image-elements \
 && cd /opt/stack/sahara-image-elements \
+###############################################################################################################################
+# Bug Alert: https://bugs.launchpad.net/sahara/+bug/1737780                                                                   #
+# At the time of documenting this, there is a bug that the Sahara team is working to fix.                                     #
+# As a result, the hadoop cluster will fail to start the datanode if you are creating the image using sahara-image-elements.  #
+# To overcome this problem,                                                                                                   #
+# $ cd /opt/stack/sahara-image-elements/diskimage-create/                                                                     #
+# $ export DIB_HDFS_LIB_DIR="/opt/hadoop/share/hadoop/tools/lib"                                                              #
+# #############################################################################################################################
 && tox -e venv -- sahara-image-create -p vanilla -v 2.7.1 -i ubuntu -u
